@@ -5,31 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vanilla weather app</title>
+    <link rel="stylesheet" href="src/style.css">
+    
+
 </head>
 <body>
+    <div class="fullPage">
     <h1 id="current-city">
         New York
       </h1>
       <h4 id="current-time">
-      Last updated: Friday 10:20
+      Last updated: Friday 17, 10:20
       </h4>
       <h4 id="description">
         Cloudy
       </h4>
+      <img src="img/clouds.png" alt="clouds">
 
-      <h2 id="current-temperature">
-        18°C | °F
-      </h2>
-      <p>
+      <div class="temperature">
+        <h2 id="current-temperature">
+          18
+        </h2>
+  <div class="celciusAndFahrenheit">
+        <a id="current-celcius" href="">°C</a>
+        |
+        <a id="current-fahrenheit" href="">°F</a>
+      </div>
+        <p class="humidityAndWind">
         Humidity: 87%
         <br />
        Wind: 4 km/h
       </p>
-       <!--open source-->
-    <br>
-    <a class="openSource">
-    <a href="">Open-source code</a>
-    by Anna Stohnii
-    </a>
+      </div>
+    </div>
+
+     <!--open source-->
+     <a class="openSource">
+     <a href="">Open-source code</a>
+     by Anna Stohnii
+     </a>
 </body>
 </html>

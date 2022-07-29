@@ -1,0 +1,38 @@
+.fullPage {
+display: block;
+margin: 0 auto;
+    padding: 40px;
+    margin: 60px 16% 10px 16% ;
+    border-radius: 20px;
+    background: linear-gradient(180.3deg, rgb(221, 221, 221) 5.5%, rgb(110, 136, 161) 90.2%);
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.openSource{
+    padding-left: 16%;
+}
+
+img{
+    width: 26%;
+}
+
+.temperature{
+    margin-top: -22%;
+    margin-left: 38%;
+    color: white;
+
+}
+.celciusAndFahrenheit{
+    margin-left: 68px;
+    margin-top: -86px;
+
+}
+
+.humidityAndWind{
+margin-top: 30px;
+font-size: 14px;
+}
+
+#current-temperature{
+    font-size: 50px;
+}
