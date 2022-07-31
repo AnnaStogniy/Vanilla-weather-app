@@ -36,3 +36,17 @@ font-size: 14px;
 #current-temperature{
     font-size: 50px;
 }
+
+.button {
+    background-color: #0bb09d;
+    color: white;
+    border: 1px solid #0bb09d;
+    border-radius: 15px;
+    padding: 5px 20px;
+  }
+  
+  .button:hover {
+    background-color: #0a453e;
+    color: white;
+    border: 1px solid #0a453e;
+  }
