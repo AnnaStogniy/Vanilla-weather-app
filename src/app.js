@@ -24,3 +24,24 @@ function currentTime() {
 
   let now = new Date();
   currentTime();
+
+  // Change input city:
+  function changeCity(event) {
+    event.preventDefault();
+    currentCity.innerHTML = `${inputNewCity.value}`;
+  
+    function getNewCity(response) {
+      let mathRoundedTemp = Math.round(response.data.main.temp);
+      currentTemperature.innerHTML = `${mathRoundedTemp}`;
+    }
+  
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputNewCity.value}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
+    axios.get(apiUrl).then(getNewCity);
+  }
+  let currentCity = document.querySelector("#current-city");
+  
+  let inputNewCity = document.querySelector("#input-city");
+  let form = document.querySelector("#change-city");
+  form.addEventListener("submit", changeCity);
+
+  let currentTemperature = document.querySelector("#current-temperature");
