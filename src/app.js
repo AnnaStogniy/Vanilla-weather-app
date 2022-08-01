@@ -32,7 +32,7 @@ function currentTime() {
   
     function getNewCity(response) {
       let mathRoundedTemp = Math.round(response.data.main.temp);
-      currentTemperature.innerHTML = `${mathRoundedTemp}`;
+      currentTemperature.innerHTML = `${mathRoundedTemp}`; 
     }
   
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputNewCity.value}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
@@ -42,6 +42,22 @@ function currentTime() {
   
   let inputNewCity = document.querySelector("#input-city");
   let form = document.querySelector("#change-city");
-  form.addEventListener("submit", changeCity);
+  form.addEventListener("submit", changeCity, changeCelsius);
 
   let currentTemperature = document.querySelector("#current-temperature");
+
+  function changeCelsius(event) {
+    event.preventDefault();
+    currentTemperature.innerHTML = `${response.data.main.temp}`;
+  }
+  let newCelsius = document.querySelector("#current-celcius");
+  newCelsius.addEventListener("click", changeCelsius);
+  
+  function changeFahrenheit(event, fa) {
+    event.preventDefault();
+    currentTemperature.innerHTML = `${fa}`;
+  }
+  let fa = `${mathRoundedTemp*9/5+32}`
+
+  let fahrenheit = document.querySelector("#current-fahrenheit");
+  fahrenheit.addEventListener("click", changeFahrenheit);
