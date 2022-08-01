@@ -33,11 +33,17 @@ function currentTime() {
     function getNewCity(response) {
       let mathRoundedTemp = Math.round(response.data.main.temp);
       currentTemperature.innerHTML = `${mathRoundedTemp}`; 
+     description.innerHTML = `${response.data.weather[0].description}`;
+     humidity.innerHTML = `Humidity: ${response.data.main.humidity} %`
+     wind.innerHTML = `Wind: ${response.data.wind.speed} km/h`
     }
   
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputNewCity.value}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
     axios.get(apiUrl).then(getNewCity);
   }
+  let wind = document.querySelector("#wind");
+  let humidity = document.querySelector("#humidity");
+  let description = document.querySelector("#description");
   let currentCity = document.querySelector("#current-city");
   
   let inputNewCity = document.querySelector("#input-city");
@@ -61,3 +67,4 @@ function currentTime() {
 
   let fahrenheit = document.querySelector("#current-fahrenheit");
   fahrenheit.addEventListener("click", changeFahrenheit);
+

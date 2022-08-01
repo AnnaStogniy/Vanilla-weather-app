@@ -28,9 +28,15 @@ img{
 
 }
 
-.humidityAndWind{
+#humidity{
 margin-top: 30px;
 font-size: 14px;
+margin-bottom: 0px;
+}
+
+#wind{
+    margin-top: -15px;
+    font-size: 14px;
 }
 
 #current-temperature{
