@@ -81,8 +81,14 @@ function currentTime() {
 
   let currentTemperature = document.querySelector("#current-temperature");
 
+// Change celsium to fahreinheit
   function changeCelsius(event) {
     event.preventDefault();
+
+    document.getElementById("current-celcius").style.color = "white"
+    document.getElementById("current-celcius").style.textDecoration = "none"
+    document.getElementById("current-fahrenheit").style.color = "#0000EE"
+
     currentTemperature.innerHTML = celsiusTemp;
   }
   let newCelsius = document.querySelector("#current-celcius");
@@ -90,6 +96,9 @@ function currentTime() {
   
   function changeFahrenheit(event) {
     event.preventDefault();
+    document.getElementById("current-fahrenheit").style.color = "white"
+    document.getElementById("current-fahrenheit").style.textDecoration = "none"
+    document.getElementById("current-celcius").style.color = "#0000EE"
 
     let fahrenheit = Math.round(celsiusTemp* 9 / 5 + 32);
 
