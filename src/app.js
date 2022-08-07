@@ -81,6 +81,34 @@ function currentTime() {
 
   let currentTemperature = document.querySelector("#current-temperature");
 
+// Display forecast
+function displayForecast(){
+let forecastElement = document.querySelector("#forecast");
+
+let days =["Thu", "Fri", "Sat", "Sun"];
+let forecastHtml = `<div class = "row">`;
+days.forEach(function (day) {
+  forecastHtml = forecastHtml + `<div class="col-2">
+  <div class="weather-forecast-date">${day}</div>
+  <img src="img/sun.png" alt="" width="75%">
+  <div class="weather-forecast-temperature">
+    <span class="weather-forecast-temperature-max">
+      18
+    </span>
+    <span class="weather-forecast-temperature-min">
+      12
+    </span>
+  </div>
+</div>
+`;
+
+});
+
+forecastHtml = forecastHtml + `</div>`;
+forecastElement.innerHTML = forecastHtml;
+console.log(forecastHtml);
+}
+
 // Change celsium to fahreinheit
   function changeCelsius(event) {
     event.preventDefault();
