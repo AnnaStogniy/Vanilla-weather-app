@@ -25,67 +25,81 @@ function currentTime() {
   let now = new Date();
   currentTime();
 
+  //Format days forecast
+  function formatDay(timestamp) {
+    let date = new Date(timestamp * 1000);
+    let day = date.getDay();
+    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  
+    return days[day];
+  }
+
   // Display forecast
 function displayForecast(getResponseForecast){
   console.log(getResponseForecast);
-  let forecast = getResponseForecast.data.list
+  let forecast = getResponseForecast.data.daily
   let forecastElement = document.querySelector("#forecast");
 
   let days =["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = `<div class = "row">`;
-  forecast.forEach(function (forecastDay) {
-
+  forecast.forEach(function (forecastDay, index) {
+    console.log(index)
+if (index >0 && index < 7){
     forecastHtml = forecastHtml + `<div class="col-2">
-    <div class="weather-forecast-date">${forecastDay.dt}</div>
+    <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
     <img id="image-forecast" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="75%">
     <div class="weather-forecast-temperature">
       <span class="weather-forecast-temperature-max">
-        ${Math.round(forecastDay.main.temp_max)}
+        ${Math.round(forecastDay.temp.max)}°
       </span>
       <span class="weather-forecast-temperature-min">
-      ${Math.round(forecastDay.main.temp_min)}
+      ${Math.round(forecastDay.temp.min)}°
       </span>
     </div>
   </div>
   `;
-  
+}
   });
   forecastHtml = forecastHtml + `</div>`;
   forecastElement.innerHTML = forecastHtml;
+  forecastCol(forecast)
 
-  //change image and colour
-let colForecast = document.getElementsByClassName("col-2");
-colForecast.forEach(function (forecastImages) { 
-      if (forecastImages.weather[0].main === "Clear"){
-    document.getElementById("image-forecast").src = "img/sun.png";
-   }
-
-   if (forecastImages.weather[0].main === "Clouds"){
-    document.getElementById("image-forecast").src = "img/sunwithclouds.png";
-   }
-   
-   if (forecastImages.weather[0].main === "Rain"){
-    document.getElementById("image-forecast").src = "img/rainy-day.png";
-   }
-   
-   if (forecastImages.weather[0].main === "Snow"){
-    document.getElementById("image-forecast").src = "img/snowflake.png";
-   }
-   
-   if (forecastImages.weather[0].main === "Thunderstorm"){
-    document.getElementById("image-forecast").src = "img/thunderstorm.png";
-   }
-  });
+  
 }
 
-function getApiForecast(response){
-let apiUrlForecast = `http://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
+  //change image and colour
+
+function forecastCol(forecastImages) {
+  forecastImages.forEach()
+  if (forecastImages.weather[0].main === "Clear"){
+      document.getElementById("image-forecast").src = "img/sun.png";
+     }
+  
+     if (forecastImages.weather[0].main === "Clouds"){
+      document.getElementById("image-forecast").src = "img/sunwithclouds.png";
+     }
+     
+     if (forecastImages.weather[0].main === "Rain"){
+      document.getElementById("image-forecast").src = "img/rainy-day.png";
+     }
+     
+     if (forecastImages.weather[0].main === "Snow"){
+      document.getElementById("image-forecast").src = "img/snowflake.png";
+     }
+     
+     if (forecastImages.weather[0].main === "Thunderstorm"){
+      document.getElementById("image-forecast").src = "img/thunderstorm.png";
+     }
+    };
+
+
+function getApiForecast(coordinates){
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+let apiUrlForecast = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 console.log(apiUrlForecast);
 
   axios.get(apiUrlForecast).then(displayForecast);
   }
-  
-
   
 
   // Change input city:
@@ -139,7 +153,7 @@ console.log(apiUrlForecast);
     document.getElementById("image").src = "img/thunderstorm.png";
     document.getElementById("fullPage").style.background = "linear-gradient(to top, #30cfd0 0%, #330867 100%)";
    }
-   getApiForecast(response);
+   getApiForecast(response.data.coord);
   }
   let form = document.querySelector("#change-city");
   form.addEventListener("submit", changeCity);
