@@ -62,15 +62,10 @@ if (index >0 && index < 7){
   });
   forecastHtml = forecastHtml + `</div>`;
   forecastElement.innerHTML = forecastHtml;
-  forecastCol(forecast)
 
-  
-}
+    //change image forecast
 
-  //change image and colour
-
-function forecastCol(forecastImages) {
-  forecastImages.forEach()
+  forecast.forEach(function (forecastImages){
   if (forecastImages.weather[0].main === "Clear"){
       document.getElementById("image-forecast").src = "img/sun.png";
      }
@@ -89,8 +84,13 @@ function forecastCol(forecastImages) {
      
      if (forecastImages.weather[0].main === "Thunderstorm"){
       document.getElementById("image-forecast").src = "img/thunderstorm.png";
-     }
-    };
+     } 
+    });
+
+}
+
+
+  
 
 
 function getApiForecast(coordinates){
