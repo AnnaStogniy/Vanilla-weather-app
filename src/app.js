@@ -25,6 +25,69 @@ function currentTime() {
   let now = new Date();
   currentTime();
 
+  // Display forecast
+function displayForecast(getResponseForecast){
+  console.log(getResponseForecast);
+  let forecast = getResponseForecast.data.list
+  let forecastElement = document.querySelector("#forecast");
+
+  let days =["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = `<div class = "row">`;
+  forecast.forEach(function (forecastDay) {
+
+    forecastHtml = forecastHtml + `<div class="col-2">
+    <div class="weather-forecast-date">${forecastDay.dt}</div>
+    <img id="image-forecast" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="75%">
+    <div class="weather-forecast-temperature">
+      <span class="weather-forecast-temperature-max">
+        ${Math.round(forecastDay.main.temp_max)}
+      </span>
+      <span class="weather-forecast-temperature-min">
+      ${Math.round(forecastDay.main.temp_min)}
+      </span>
+    </div>
+  </div>
+  `;
+  
+  });
+  forecastHtml = forecastHtml + `</div>`;
+  forecastElement.innerHTML = forecastHtml;
+
+  //change image and colour
+let colForecast = document.getElementsByClassName("col-2");
+colForecast.forEach(function (forecastImages) { 
+      if (forecastImages.weather[0].main === "Clear"){
+    document.getElementById("image-forecast").src = "img/sun.png";
+   }
+
+   if (forecastImages.weather[0].main === "Clouds"){
+    document.getElementById("image-forecast").src = "img/sunwithclouds.png";
+   }
+   
+   if (forecastImages.weather[0].main === "Rain"){
+    document.getElementById("image-forecast").src = "img/rainy-day.png";
+   }
+   
+   if (forecastImages.weather[0].main === "Snow"){
+    document.getElementById("image-forecast").src = "img/snowflake.png";
+   }
+   
+   if (forecastImages.weather[0].main === "Thunderstorm"){
+    document.getElementById("image-forecast").src = "img/thunderstorm.png";
+   }
+  });
+}
+
+function getApiForecast(response){
+let apiUrlForecast = `http://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
+console.log(apiUrlForecast);
+
+  axios.get(apiUrlForecast).then(displayForecast);
+  }
+  
+
+  
+
   // Change input city:
   function changeCity(event) {
     let currentCity = document.querySelector("#current-city");
@@ -35,6 +98,7 @@ function currentTime() {
   
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${inputNewCity.value}&appid=648a7061e4cc76852d26d41d4a66634b&units=metric`;
     axios.get(apiUrl).then(getNewCity);
+
   }
 
   //Change all temperature additions
@@ -75,39 +139,14 @@ function currentTime() {
     document.getElementById("image").src = "img/thunderstorm.png";
     document.getElementById("fullPage").style.background = "linear-gradient(to top, #30cfd0 0%, #330867 100%)";
    }
+   getApiForecast(response);
   }
   let form = document.querySelector("#change-city");
   form.addEventListener("submit", changeCity);
 
   let currentTemperature = document.querySelector("#current-temperature");
 
-// Display forecast
-function displayForecast(){
-let forecastElement = document.querySelector("#forecast");
 
-let days =["Thu", "Fri", "Sat", "Sun"];
-let forecastHtml = `<div class = "row">`;
-days.forEach(function (day) {
-  forecastHtml = forecastHtml + `<div class="col-2">
-  <div class="weather-forecast-date">${day}</div>
-  <img src="img/sun.png" alt="" width="75%">
-  <div class="weather-forecast-temperature">
-    <span class="weather-forecast-temperature-max">
-      18
-    </span>
-    <span class="weather-forecast-temperature-min">
-      12
-    </span>
-  </div>
-</div>
-`;
-
-});
-
-forecastHtml = forecastHtml + `</div>`;
-forecastElement.innerHTML = forecastHtml;
-console.log(forecastHtml);
-}
 
 // Change celsium to fahreinheit
   function changeCelsius(event) {
@@ -133,6 +172,7 @@ console.log(forecastHtml);
     currentTemperature.innerHTML = `${fahrenheit}`;
   }
   let celsiusTemp = null;
-
+  
   let fahrenheitElement = document.querySelector("#current-fahrenheit");
   fahrenheitElement.addEventListener("click", changeFahrenheit);
+
