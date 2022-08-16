@@ -47,7 +47,7 @@ function displayForecast(getResponseForecast){
 if (index >0 && index < 7){
     forecastHtml = forecastHtml + `<div class="col-2">
     <div class="weather-forecast-date">${formatDay(forecastDay.dt)}</div>
-    <img id="image-forecast" src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="" width="75%">
+    <img id="image-forecast" src="img/${forecastDay.weather[0].icon}.png" alt="" width="75%">
     <div class="weather-forecast-temperature">
       <span class="weather-forecast-temperature-max">
         ${Math.round(forecastDay.temp.max)}°
@@ -65,27 +65,7 @@ if (index >0 && index < 7){
 
     //change image forecast
 
-  forecast.forEach(function (forecastImages){
-  if (forecastImages.weather[0].main === "Clear"){
-      document.getElementById("image-forecast").src = "img/sun.png";
-     }
   
-     if (forecastImages.weather[0].main === "Clouds"){
-      document.getElementById("image-forecast").src = "img/sunwithclouds.png";
-     }
-     
-     if (forecastImages.weather[0].main === "Rain"){
-      document.getElementById("image-forecast").src = "img/rainy-day.png";
-     }
-     
-     if (forecastImages.weather[0].main === "Snow"){
-      document.getElementById("image-forecast").src = "img/snowflake.png";
-     }
-     
-     if (forecastImages.weather[0].main === "Thunderstorm"){
-      document.getElementById("image-forecast").src = "img/thunderstorm.png";
-     } 
-    });
 
 }
 
@@ -130,27 +110,27 @@ console.log(apiUrlForecast);
    //change image and colour
    let descriptionToImage = response.data.weather[0].main;
    if (descriptionToImage === "Clear"){
-    document.getElementById("image").src = "img/sun.png";
+    document.getElementById("image").src = "img/01d.png";
     document.getElementById("fullPage").style.background = "linear-gradient(110.3deg, rgb(238, 179, 123) 8.7%, rgb(216, 103, 77) 47.5%, rgb(114, 43, 54) 89.1%)";
    }
 
    if (descriptionToImage === "Clouds"){
-    document.getElementById("image").src = "img/sunwithclouds.png";
+    document.getElementById("image").src = "img/02d.png";
     document.getElementById("fullPage").style.background = "linear-gradient(109.6deg, rgb(0, 37, 84) 11.2%, rgba(0, 37, 84, 0.32) 100.2%)";
    }
 
    if (descriptionToImage === "Rain"){
-    document.getElementById("image").src = "img/rainy-day.png";
+    document.getElementById("image").src = "img/09d.png";
     document.getElementById("fullPage").style.background = "linear-gradient(111.4deg, rgb(55, 168, 192) -0.2%, rgb(103, 187, 125) 100.2%)";
    }
 
    if (descriptionToImage === "Snow"){
-    document.getElementById("image").src = "img/snowflake.png";
+    document.getElementById("image").src = "img/13d.png";
     document.getElementById("fullPage").style.background = "linear-gradient(111.5deg, rgb(187, 232, 255) 11.1%, rgb(4, 78, 116) 107.5%)";
    }
 
    if (descriptionToImage === "Thunderstorm"){
-    document.getElementById("image").src = "img/thunderstorm.png";
+    document.getElementById("image").src = "img/11d.png";
     document.getElementById("fullPage").style.background = "linear-gradient(to top, #30cfd0 0%, #330867 100%)";
    }
    getApiForecast(response.data.coord);
